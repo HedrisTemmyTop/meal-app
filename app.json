@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "meal-app",
+    "slug": "meal-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "backgroundColor": "#24180f",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "backgroundColor": "#24180f"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png"
+      },
+      "backgroundColor": "#24180f"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
