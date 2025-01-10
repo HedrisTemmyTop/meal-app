@@ -10,32 +10,76 @@ import WelcomeScreen from "./screens/drawer-project/WelcomeScreen";
 import UserScreen from "./screens/drawer-project/UserScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import FavouriteScreen from "./screens/FavouriteScreen";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 
+const DrawerNavigator = function () {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerTintColor: "#fff",
+        headerStyle: {
+          backgroundColor: "#351401",
+        },
+        sceneContainerStyle: {
+          backgroundColor: "#3f2f25",
+        },
+        drawerContentStyle: {
+          backgroundColor: "#351401",
+        },
+        drawerActiveTintColor: "#351401",
+        drawerInactiveTintColor: "#fff",
+        drawerActiveBackgroundColor: "#e4baa1",
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          title: "All Categories",
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="list" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Favorites"
+        component={FavouriteScreen}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="star" size={size} color={color} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+};
+
 export default function App() {
   return (
-    <>
+    <View style={styles.container}>
       <StatusBar style="light" />
       <NavigationContainer>
-        {/* <Stack.Navigator
+        <Stack.Navigator
           screenOptions={{
             headerTintColor: "#fff",
             headerStyle: {
               backgroundColor: "#351401",
             },
             contentStyle: {
-              backgroundColor: "#3f2f25",
+              backgroundColor: "#24180f",
             },
           }}
         >
           <Stack.Screen
-            name="MealsCategories"
+            name="Drawer"
             options={{
               title: "All Categories",
+              headerShown: false,
             }}
-            component={CategoriesScreen}
+            component={DrawerNavigator}
           />
           <Stack.Screen
             name="MealsOverview"
@@ -47,8 +91,14 @@ export default function App() {
             //   };
             // }}
           />
-          <Stack.Screen name="MealDetails" component={MealDetailScreen} />
-        </Stack.Navigator> */}
+          <Stack.Screen
+            name="MealDetails"
+            options={{
+              title: "Meal",
+            }}
+            component={MealDetailScreen}
+          />
+        </Stack.Navigator>
         {/* <Drawer.Navigator
           screenOptions={{
             drawerActiveBackgroundColor: "#f0e1ff",
@@ -81,8 +131,8 @@ export default function App() {
             }}
           />
         </Drawer.Navigator> */}
-        <BottomTab.Navigator
-          screenOptions={{
+        {/* <BottomTab.Navigator */}
+        {/* screenOptions={{
             // drawerActiveBackgroundColor: "#f0e1ff",
             // drawerActiveTintColor: "#3c0a6b",
 
@@ -92,8 +142,8 @@ export default function App() {
 
             headerTintColor: "#fff",
           }}
-        >
-          {/* <Drawer.Screen
+        > */}
+        {/* <Drawer.Screen
             name="Welcome"
             component={WelcomeScreen}
             options={{
@@ -103,7 +153,7 @@ export default function App() {
               ),
             }}
           /> */}
-          {/* <Drawer.Screen
+        {/* <Drawer.Screen
             name="User"
             component={UserScreen}
             options={{
@@ -112,9 +162,9 @@ export default function App() {
               ),
             }}
           /> */}
-        </BottomTab.Navigator>
+        {/* </BottomTab.Navigator> */}
       </NavigationContainer>
-    </>
+    </View>
   );
 }
 
