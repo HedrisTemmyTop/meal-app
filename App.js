@@ -11,6 +11,9 @@ import UserScreen from "./screens/drawer-project/UserScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FavouriteScreen from "./screens/FavouriteScreen";
+import FavoritesContextProvider from "./store/context/favourites-context";
+import { Provider } from "react-redux";
+import store from "./store/redux/store";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -61,45 +64,47 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerTintColor: "#fff",
-            headerStyle: {
-              backgroundColor: "#351401",
-            },
-            contentStyle: {
-              backgroundColor: "#24180f",
-            },
-          }}
-        >
-          <Stack.Screen
-            name="Drawer"
-            options={{
-              title: "All Categories",
-              headerShown: false,
-            }}
-            component={DrawerNavigator}
-          />
-          <Stack.Screen
-            name="MealsOverview"
-            component={MealsOverviewScreen}
-            // options={({ route }) => {
+      <FavoritesContextProvider>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#351401",
+                },
+                contentStyle: {
+                  backgroundColor: "#24180f",
+                },
+              }}
+            >
+              <Stack.Screen
+                name="Drawer"
+                options={{
+                  title: "All Categories",
+                  headerShown: false,
+                }}
+                component={DrawerNavigator}
+              />
+              <Stack.Screen
+                name="MealsOverview"
+                component={MealsOverviewScreen}
+                // options={({ route }) => {
 
-            //   return {
-            //     title: route.params.categoryId,
-            //   };
-            // }}
-          />
-          <Stack.Screen
-            name="MealDetails"
-            options={{
-              title: "Meal",
-            }}
-            component={MealDetailScreen}
-          />
-        </Stack.Navigator>
-        {/* <Drawer.Navigator
+                //   return {
+                //     title: route.params.categoryId,
+                //   };
+                // }}
+              />
+              <Stack.Screen
+                name="MealDetails"
+                options={{
+                  title: "Meal",
+                }}
+                component={MealDetailScreen}
+              />
+            </Stack.Navigator>
+            {/* <Drawer.Navigator
           screenOptions={{
             drawerActiveBackgroundColor: "#f0e1ff",
             drawerActiveTintColor: "#3c0a6b",
@@ -131,8 +136,8 @@ export default function App() {
             }}
           />
         </Drawer.Navigator> */}
-        {/* <BottomTab.Navigator */}
-        {/* screenOptions={{
+            {/* <BottomTab.Navigator */}
+            {/* screenOptions={{
             // drawerActiveBackgroundColor: "#f0e1ff",
             // drawerActiveTintColor: "#3c0a6b",
 
@@ -143,7 +148,7 @@ export default function App() {
             headerTintColor: "#fff",
           }}
         > */}
-        {/* <Drawer.Screen
+            {/* <Drawer.Screen
             name="Welcome"
             component={WelcomeScreen}
             options={{
@@ -153,7 +158,7 @@ export default function App() {
               ),
             }}
           /> */}
-        {/* <Drawer.Screen
+            {/* <Drawer.Screen
             name="User"
             component={UserScreen}
             options={{
@@ -162,8 +167,10 @@ export default function App() {
               ),
             }}
           /> */}
-        {/* </BottomTab.Navigator> */}
-      </NavigationContainer>
+            {/* </BottomTab.Navigator> */}
+          </NavigationContainer>
+        </Provider>
+      </FavoritesContextProvider>
     </View>
   );
 }
